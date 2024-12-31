@@ -1,0 +1,103 @@
+// import 'package:foodmenu/model/food_model.dart';
+// import 'package:foodmenu/model/menu_model.dart';
+
+// class MenuDataModel {
+//   static final List<MenuModel> menuData = [
+//     MenuModel(
+//       foodCategory: "MAIN MENU",
+//       image: 'assets/burger.png',
+//       foodItem: [
+//         FoodModel(foodName: 'Cheeseburger', foodprice: 35),
+//         FoodModel(foodName: 'Chicken Sandwich', foodprice: 28),
+//         FoodModel(foodName: 'Chicken Curry', foodprice: 42),
+//         FoodModel(foodName: 'Beef Steak', foodprice: 75),
+//         FoodModel(foodName: 'Fried Rice', foodprice: 18),
+//         FoodModel(foodName: 'Grilled Chicken', foodprice: 50),
+//         FoodModel(foodName: 'Pasta Alfredo', foodprice: 32),
+//         FoodModel(foodName: 'Paneer Masala', foodprice: 40),
+//         FoodModel(foodName: 'Mutton Rogan Josh', foodprice: 55),
+//         FoodModel(foodName: 'Vegetable Curry', foodprice: 22),
+//       ],
+//     ),
+//     MenuModel(
+//       foodCategory: "APPETIZERS",
+//       image: 'assets/sandwich.png',
+//       foodItem: [
+//         FoodModel(foodName: 'Spring Rolls', foodprice: 25),
+//         FoodModel(foodName: 'Garlic Bread', foodprice: 20),
+//         FoodModel(foodName: 'Cheese Balls', foodprice: 28),
+//         FoodModel(foodName: 'Chicken Ball', foodprice: 30),
+//         FoodModel(foodName: 'French Fries', foodprice: 15),
+//         FoodModel(foodName: 'Crispy Corn', foodprice: 18),
+//         FoodModel(foodName: 'Sticks', foodprice: 35),
+//         FoodModel(foodName: 'Bruschetta', foodprice: 25),
+//         FoodModel(foodName: 'Veg Samosa', foodprice: 12),
+//         FoodModel(foodName: 'Fry Mushrooms', foodprice: 40),
+//       ],
+//     ),
+//     MenuModel(
+//       foodCategory: "BEVERAGES",
+//       image: 'assets/fish.png',
+//       foodItem: [
+//         FoodModel(foodName: 'Lemon Iced Tea', foodprice: 15),
+//         FoodModel(foodName: 'Cold Coffee', foodprice: 20),
+//         FoodModel(foodName: 'Milkshake', foodprice: 18),
+//         FoodModel(foodName: 'Smoothie', foodprice: 25),
+//         FoodModel(foodName: 'Hot Chocolate', foodprice: 22),
+//         FoodModel(foodName: 'Green Tea', foodprice: 10),
+//         FoodModel(foodName: 'Espresso', foodprice: 12),
+//         FoodModel(foodName: 'Latte', foodprice: 18),
+//         FoodModel(foodName: 'Cappuccino', foodprice: 20),
+//         FoodModel(foodName: 'Fresh Juice', foodprice: 25),
+//       ],
+//     ),
+//     MenuModel(
+//       foodCategory: "DESSERTS",
+//       image: 'assets/burger.png',
+//       foodItem: [
+//         FoodModel(foodName: 'Chocolate Cake', foodprice: 30),
+//         FoodModel(foodName: 'Ice Cream Sundae', foodprice: 20),
+//         FoodModel(foodName: 'Brownie', foodprice: 25),
+//         FoodModel(foodName: 'Fruit Salad', foodprice: 15),
+//         FoodModel(foodName: 'Mango Mousse', foodprice: 22),
+//         FoodModel(foodName: 'Cheesecake', foodprice: 35),
+//         FoodModel(foodName: 'Tiramisu', foodprice: 28),
+//         FoodModel(foodName: 'Gulab Jamun', foodprice: 12),
+//         FoodModel(foodName: 'Rasmalai', foodprice: 20),
+//         FoodModel(foodName: 'Apple Pie', foodprice: 30),
+//       ],
+//     ),
+//     MenuModel(
+//       foodCategory: "SOUPS",
+//       image: 'assets/fish.png',
+//       foodItem: [
+//         FoodModel(foodName: 'Tomato Soup', foodprice: 12),
+//         FoodModel(foodName: 'Chicken Soup', foodprice: 18),
+//         FoodModel(foodName: 'Sweet Corn Soup', foodprice: 15),
+//         FoodModel(foodName: 'Mushroom Soup', foodprice: 22),
+//         FoodModel(foodName: 'Hot and Sour Soup', foodprice: 20),
+//         FoodModel(foodName: 'Miso Soup', foodprice: 18),
+//         FoodModel(foodName: 'Veg Clear Soup', foodprice: 15),
+//         FoodModel(foodName: 'Cream of Broccoli', foodprice: 25),
+//         FoodModel(foodName: 'Pumpkin Soup', foodprice: 20),
+//         FoodModel(foodName: 'Seafood Bisque', foodprice: 35),
+//       ],
+//     ),
+//     MenuModel(
+//       image: 'assets/sandwich.png',
+//       foodCategory: "SALADS",
+//       foodItem: [
+//         FoodModel(foodName: 'Greek Salad', foodprice: 28),
+//         FoodModel(foodName: 'Caesar Salad', foodprice: 25),
+//         FoodModel(foodName: 'Garden Salad', foodprice: 20),
+//         FoodModel(foodName: 'Chicken Salad', foodprice: 32),
+//         FoodModel(foodName: 'Pasta Salad', foodprice: 22),
+//         FoodModel(foodName: 'Fruit Salad', foodprice: 15),
+//         FoodModel(foodName: 'Kale Salad', foodprice: 18),
+//         FoodModel(foodName: 'Quinoa Salad', foodprice: 25),
+//         FoodModel(foodName: 'Beetroot Salad', foodprice: 20),
+//         FoodModel(foodName: 'Avocado Salad', foodprice: 30),
+//       ],
+//     ),
+//   ];
+// }
