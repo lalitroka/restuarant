@@ -11,19 +11,36 @@ class CategoryModel {
       this.foodaddItems = const []});
 }
 
+class ImageModel {
+  final int id;
+  final String imageUrl;
+
+  ImageModel({required this.id, required this.imageUrl});
+}
+
 class FoodItemModel {
   final int id;
   final String name;
-  final String description;
   final double price;
+  final List<DescriptionModel> description;
   final List<FoodSizeModel> sizes;
 
-  FoodItemModel(
-      {required this.id,
-      required this.name,
-      required this.description,
-      required this.price,
-      this.sizes = const []});
+  FoodItemModel({
+    required this.id,
+    required this.name,
+    required this.price,
+    this.sizes = const [],
+    this.description = const [],
+  });
+}
+
+class DescriptionModel {
+  final int id;
+  final String title;
+  final String description;
+
+  DescriptionModel(
+      {required this.id, required this.title, required this.description});
 }
 
 class FoodSizeModel {

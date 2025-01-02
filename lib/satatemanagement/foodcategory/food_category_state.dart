@@ -9,9 +9,3 @@ class FoodCategoryAddState extends FoodCategoryState {
 
   FoodCategoryAddState({required this.categoryModel});
 }
-
-class FoodCategoryImageAddState extends FoodCategoryState {
-  final File imageUrl;
-
-  FoodCategoryImageAddState({required this.imageUrl});
-}

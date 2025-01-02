@@ -6,7 +6,6 @@ part 'food_item_state.dart';
 
 class FoodItemBloc extends Bloc<FoodItemEvent, FoodItemState> {
   List<FoodItemModel> categoryFoodItems = [];
-
   FoodItemBloc() : super(FoodItemInitial()) {
     on<FoodItemAddEvent>(_foodItemAddEvent);
   }
@@ -17,7 +16,6 @@ class FoodItemBloc extends Bloc<FoodItemEvent, FoodItemState> {
         categoryFoodItems.add(foodItem);
       }
     }
-
     emit(FoodItemAddState(foodItem: categoryFoodItems));
   }
 }

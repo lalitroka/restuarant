@@ -9,9 +9,3 @@ class FoodCategoryAddEvent extends FoodCategoryEvent {
 
   FoodCategoryAddEvent({required this.categoryModel});
 }
-
-class FoodCategoryImageAddEvent extends FoodCategoryEvent {
-  final File imageUrl;
-
-  FoodCategoryImageAddEvent({required this.imageUrl});
-}

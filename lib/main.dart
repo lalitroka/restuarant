@@ -2,10 +2,12 @@ import 'dart:io'; // To check platform
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:foodmenu/satatemanagement/description/description_bloc.dart';
 import 'package:foodmenu/satatemanagement/foodcategory/food_category_bloc.dart';
 import 'package:foodmenu/satatemanagement/fooditem/food_item_bloc.dart';
 import 'package:foodmenu/satatemanagement/foodorder/foodorder_bloc.dart';
 import 'package:foodmenu/satatemanagement/foodsize/foodsize_add_bloc.dart';
+import 'package:foodmenu/satatemanagement/imageinsert/imageadd_bloc.dart';
 import 'package:foodmenu/view/admin_view/category_add.dart';
 import 'package:foodmenu/view/admin_view/food_description.dart';
 import 'package:foodmenu/view/admin_view/food_view.dart';
@@ -33,7 +35,9 @@ class _MyAppState extends State<MyApp> {
         BlocProvider(create: (_) => FoodOrderBloc()),
         BlocProvider(create: (_) => FoodCategoryBloc()),
         BlocProvider(create: (_) => FoodItemBloc()),
-        BlocProvider(create: (_) => FoodSizeAddBloc())
+        BlocProvider(create: (_) => FoodSizeAddBloc()),
+        BlocProvider(create: (_) => DescriptionBloc()),
+        BlocProvider(create: (_) => ImageaddBloc()),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,

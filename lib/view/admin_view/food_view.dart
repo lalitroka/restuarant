@@ -1,8 +1,14 @@
+import 'dart:convert';
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_quill/flutter_quill.dart';
+import 'package:foodmenu/satatemanagement/description/description_bloc.dart';
 import 'package:foodmenu/satatemanagement/foodcategory/food_category_bloc.dart';
 import 'package:foodmenu/satatemanagement/fooditem/food_item_bloc.dart';
 import 'package:foodmenu/satatemanagement/foodsize/foodsize_add_bloc.dart';
+import 'package:foodmenu/satatemanagement/imageinsert/imageadd_bloc.dart';
 import 'package:foodmenu/view/commonwidgets/background_painter.dart';
 import 'package:foodmenu/view/userview/menu_widget.dart';
 
@@ -16,7 +22,14 @@ class FoodView extends StatefulWidget {
 class _FoodViewState extends State<FoodView> {
   @override
   Widget build(BuildContext context) {
+    bool isExpand = false;
     final screenHeight = MediaQuery.of(context).size.height;
+
+    void _toogleExpand() {
+      setState(() {
+        isExpand = !isExpand;
+      });
+    }
 
     return Scaffold(
       body: CustomPaint(
@@ -77,43 +90,57 @@ class _FoodViewState extends State<FoodView> {
                                       MainAxisAlignment.spaceBetween,
                                   children: [
                                     if (isImageFirst)
-                                      BlocBuilder<FoodCategoryBloc,
-                                          FoodCategoryState>(
-                                        builder: (context, state) {
-                                          if (state
-                                              is FoodCategoryImageAddState) {
-                                            return Container(
-                                              margin:
-                                                  const EdgeInsets.symmetric(
-                                                      vertical: 8.0),
-                                              height: 140,
-                                              width: 140,
-                                              decoration: BoxDecoration(
-                                                color: Colors.amberAccent,
-                                              ),
-                                              child: Image.file(state.imageUrl),
-                                            );
-                                          } else {
-                                            return Container(
-                                              decoration: BoxDecoration(
-                                                color: Colors.amberAccent,
-                                              ),
-                                              height: 140,
-                                              width: 140,
-                                              child: Center(
-                                                child: Text(
-                                                  "Select Image",
-                                                  style: TextStyle(
-                                                    color: Colors.grey,
-                                                    fontSize: 16,
-                                                    fontWeight: FontWeight.bold,
+                                      BlocBuilder<ImageaddBloc, ImageaddState>(
+                                          builder: (context, imageState) {
+                                        if (imageState is FoodImageAddState) {
+                                          final imageUrl =
+                                              imageState.imageModel;
+                                          if (imageUrl.isNotEmpty) {
+                                            return Builder(builder: (context) {
+                                              return SizedBox(
+                                                height: 150,
+                                                width: 150,
+                                                child: ListView.separated(
+                                                  separatorBuilder:
+                                                      (context, index) =>
+                                                          SizedBox(
+                                                    height: 10,
                                                   ),
+                                                  itemCount: imageUrl.length,
+                                                  shrinkWrap: true,
+                                                  physics:
+                                                      NeverScrollableScrollPhysics(),
+                                                  itemBuilder:
+                                                      (context, index) {
+                                                    final imagePath =
+                                                        imageUrl[index];
+                                                    return ClipRRect(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              100),
+                                                      child: Image.file(
+                                                        File(
+                                                            imagePath.imageUrl),
+                                                        fit: BoxFit.cover,
+                                                        height: 150,
+                                                        width: 150,
+                                                      ),
+                                                    );
+                                                  },
                                                 ),
-                                              ),
-                                            );
+                                              );
+                                            });
                                           }
-                                        },
-                                      ),
+                                        }
+                                        return Container(
+                                          height: 140,
+                                          width: 140,
+                                          decoration: BoxDecoration(
+                                              borderRadius:
+                                                  BorderRadius.circular(100),
+                                              color: Colors.amberAccent),
+                                        );
+                                      }),
                                     SizedBox(
                                       width: 20,
                                     ),
@@ -150,96 +177,181 @@ class _FoodViewState extends State<FoodView> {
                                                       (context, itemIndex) {
                                                     final foodItem =
                                                         foodItems[itemIndex];
-                                                    return Column(
-                                                      children: [
-                                                        ConstrainedBox(
-                                                          constraints:
-                                                              BoxConstraints(
-                                                                  maxWidth: double
-                                                                      .infinity),
-                                                          child: Row(
-                                                            mainAxisAlignment:
-                                                                MainAxisAlignment
-                                                                    .start,
-                                                            children: [
-                                                              Flexible(
-                                                                flex: 2,
-                                                                child: FoodNameText(
-                                                                    foodName:
-                                                                        foodItem
-                                                                            .name),
+                                                    return Flexible(
+                                                      child: Column(
+                                                        children: [
+                                                          ConstrainedBox(
+                                                            constraints:
+                                                                BoxConstraints(
+                                                                    maxWidth: double
+                                                                        .infinity),
+                                                            child:
+                                                                GestureDetector(
+                                                              onTap: () {
+                                                                _toogleExpand();
+                                                              },
+                                                              child: Row(
+                                                                mainAxisAlignment:
+                                                                    MainAxisAlignment
+                                                                        .start,
+                                                                children: [
+                                                                  Flexible(
+                                                                    flex: 2,
+                                                                    child: FoodNameText(
+                                                                        foodName:
+                                                                            foodItem.name),
+                                                                  ),
+                                                                  Flexible(
+                                                                    flex: 1,
+                                                                    child: FoodPriceText(
+                                                                        foodPrice:
+                                                                            foodItem.price),
+                                                                  ),
+                                                                ],
                                                               ),
-                                                              Flexible(
-                                                                flex: 1,
-                                                                child: FoodPriceText(
-                                                                    foodPrice:
-                                                                        foodItem
-                                                                            .price),
-                                                              ),
-                                                            ],
+                                                            ),
                                                           ),
-                                                        ),
-                                                        BlocBuilder<
-                                                            FoodSizeAddBloc,
-                                                            FoodSizeAddState>(
-                                                          builder: (context,
-                                                              sizeState) {
-                                                            if (sizeState
-                                                                is FoodItemSizeAddState) {
-                                                              final sizes =
-                                                                  sizeState
-                                                                      .foodSizeModel;
-                                                              return ListView
-                                                                  .builder(
-                                                                shrinkWrap:
-                                                                    true,
-                                                                physics:
-                                                                    const NeverScrollableScrollPhysics(),
-                                                                itemCount: sizes
-                                                                    .length,
-                                                                itemBuilder:
-                                                                    (context,
-                                                                        sizeIndex) {
-                                                                  final sizeData =
-                                                                      sizes[
-                                                                          sizeIndex];
-                                                                  return Padding(
-                                                                    padding:
-                                                                        const EdgeInsets
-                                                                            .all(
-                                                                            2.0),
-                                                                    child: Row(
-                                                                      mainAxisAlignment:
-                                                                          MainAxisAlignment
-                                                                              .spaceBetween,
-                                                                      children: [
-                                                                        Flexible(
-                                                                          flex:
-                                                                              2,
-                                                                          child:
-                                                                              FoodNameText(foodName: sizeData.size),
-                                                                        ),
-                                                                        Flexible(
-                                                                          flex:
-                                                                              1,
-                                                                          child:
-                                                                              FoodPriceText(foodPrice: sizeData.price),
-                                                                        ),
-                                                                      ],
-                                                                    ),
-                                                                  );
-                                                                },
-                                                              );
-                                                            }
-                                                            return const SizedBox();
-                                                          },
-                                                        ),
-                                                      ],
+                                                          BlocBuilder<
+                                                              FoodSizeAddBloc,
+                                                              FoodSizeAddState>(
+                                                            builder: (context,
+                                                                sizeState) {
+                                                              if (sizeState
+                                                                  is FoodItemSizeAddState) {
+                                                                final sizes =
+                                                                    sizeState
+                                                                        .foodSizeModel;
+                                                                return ListView
+                                                                    .builder(
+                                                                  shrinkWrap:
+                                                                      true,
+                                                                  physics:
+                                                                      const NeverScrollableScrollPhysics(),
+                                                                  itemCount: sizes
+                                                                      .length,
+                                                                  itemBuilder:
+                                                                      (context,
+                                                                          sizeIndex) {
+                                                                    final sizeData =
+                                                                        sizes[
+                                                                            sizeIndex];
+                                                                    return Padding(
+                                                                      padding: const EdgeInsets
+                                                                          .all(
+                                                                          2.0),
+                                                                      child:
+                                                                          Column(
+                                                                        children: [
+                                                                          Row(
+                                                                            mainAxisAlignment:
+                                                                                MainAxisAlignment.spaceBetween,
+                                                                            children: [
+                                                                              Flexible(
+                                                                                flex: 2,
+                                                                                child: FoodNameText(foodName: sizeData.size),
+                                                                              ),
+                                                                              Flexible(
+                                                                                flex: 1,
+                                                                                child: FoodPriceText(foodPrice: sizeData.price),
+                                                                              ),
+                                                                            ],
+                                                                          ),
+                                                                        ],
+                                                                      ),
+                                                                    );
+                                                                  },
+                                                                );
+                                                              }
+                                                              return const SizedBox();
+                                                            },
+                                                          ),
+                                                          if (isExpand)
+                                                            BlocBuilder<
+                                                                DescriptionBloc,
+                                                                DescriptionState>(
+                                                              builder:
+                                                                  (BuildContext
+                                                                          context,
+                                                                      state) {
+                                                                if (state
+                                                                    is FoodItemDescriptionState) {
+                                                                  final dataState =
+                                                                      state
+                                                                          .descriptionModel;
+                                                                  return ListView
+                                                                      .builder(
+                                                                          shrinkWrap:
+                                                                              true,
+                                                                          itemCount: dataState
+                                                                              .length,
+                                                                          itemBuilder:
+                                                                              (context, index) {
+                                                                            final foodData =
+                                                                                dataState[index];
+                                                                            final titleDocument =
+                                                                                Document.fromJson(jsonDecode(foodData.title));
+                                                                            final descriptionDocument =
+                                                                                Document.fromJson(jsonDecode(foodData.description));
+                                                                            final titleController =
+                                                                                QuillController(
+                                                                              document: titleDocument,
+                                                                              selection: TextSelection.collapsed(offset: 0),
+                                                                            );
+
+                                                                            final descriptionController =
+                                                                                QuillController(
+                                                                              document: descriptionDocument,
+                                                                              selection: TextSelection.collapsed(offset: 0),
+                                                                            );
+                                                                            return Column(
+                                                                              children: [
+                                                                                QuillEditor.basic(
+                                                                                  controller: titleController,
+                                                                                  configurations: QuillEditorConfigurations(
+                                                                                    customStyles: DefaultStyles(
+                                                                                      paragraph: DefaultTextBlockStyle(
+                                                                                        TextStyle(
+                                                                                          color: Colors.white,
+                                                                                          fontSize: 16,
+                                                                                        ),
+                                                                                        HorizontalSpacing(6, 6),
+                                                                                        VerticalSpacing(6, 6),
+                                                                                        VerticalSpacing(6, 6),
+                                                                                        BoxDecoration(),
+                                                                                      ),
+                                                                                    ),
+                                                                                  ),
+                                                                                ),
+                                                                                QuillEditor.basic(
+                                                                                  controller: descriptionController,
+                                                                                  configurations: QuillEditorConfigurations(
+                                                                                    customStyles: DefaultStyles(
+                                                                                      paragraph: DefaultTextBlockStyle(
+                                                                                        TextStyle(
+                                                                                          color: Colors.white,
+                                                                                          fontSize: 16,
+                                                                                        ),
+                                                                                        HorizontalSpacing(6, 6),
+                                                                                        VerticalSpacing(6, 6),
+                                                                                        VerticalSpacing(6, 6),
+                                                                                        BoxDecoration(),
+                                                                                      ),
+                                                                                    ),
+                                                                                  ),
+                                                                                ),
+                                                                              ],
+                                                                            );
+                                                                          });
+                                                                }
+                                                                return SizedBox();
+                                                              },
+                                                            ),
+                                                        ],
+                                                      ),
                                                     );
                                                   },
                                                 );
                                               }
-
                                               return const SizedBox(
                                                   child: Text(
                                                       'Food items not found'));
@@ -264,45 +376,52 @@ class _FoodViewState extends State<FoodView> {
                                       width: 5,
                                     ),
                                     if (!isImageFirst)
-                                      BlocBuilder<FoodCategoryBloc,
-                                          FoodCategoryState>(
-                                        builder: (context, state) {
-                                          if (state
-                                              is FoodCategoryImageAddState) {
-                                            return Container(
-                                              margin:
-                                                  const EdgeInsets.symmetric(
-                                                      vertical: 8.0),
-                                              height: 140,
-                                              width: 140,
-                                              decoration: BoxDecoration(
-                                                color: Colors.amberAccent,
-                                              ),
-                                              child: Image.file(state.imageUrl),
-                                            );
-                                          } else {
-                                            return Container(
-                                              decoration: BoxDecoration(
-                                                  color: Colors.amberAccent,
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          50)),
-                                              height: 140,
-                                              width: 140,
-                                              child: Center(
-                                                child: Text(
-                                                  "Select Image",
-                                                  style: TextStyle(
-                                                    color: Colors.grey,
-                                                    fontSize: 16,
-                                                    fontWeight: FontWeight.bold,
-                                                  ),
+                                      BlocBuilder<ImageaddBloc, ImageaddState>(
+                                          builder: (context, imageState) {
+                                        if (imageState is FoodImageAddState) {
+                                          final imageUrl =
+                                              imageState.imageModel;
+                                          if (imageUrl.isNotEmpty) {
+                                            return Builder(builder: (context) {
+                                              return SizedBox(
+                                                height: 150,
+                                                width: 150,
+                                                child: ListView.builder(
+                                                  itemCount: imageUrl.length,
+                                                  shrinkWrap: true,
+                                                  physics:
+                                                      NeverScrollableScrollPhysics(),
+                                                  itemBuilder:
+                                                      (context, index) {
+                                                    final imagePath =
+                                                        imageUrl[index];
+                                                    return ClipRRect(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              100),
+                                                      child: Image.file(
+                                                        File(
+                                                            imagePath.imageUrl),
+                                                        fit: BoxFit.cover,
+                                                        height: 150,
+                                                        width: 150,
+                                                      ),
+                                                    );
+                                                  },
                                                 ),
-                                              ),
-                                            );
+                                              );
+                                            });
                                           }
-                                        },
-                                      ),
+                                        }
+                                        return Container(
+                                          height: 140,
+                                          width: 140,
+                                          decoration: BoxDecoration(
+                                              borderRadius:
+                                                  BorderRadius.circular(100),
+                                              color: Colors.amberAccent),
+                                        );
+                                      }),
                                   ],
                                 );
                               },
