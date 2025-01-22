@@ -1,0 +1,17 @@
+{
+    "productId": "1",
+    "productName": "EPAYTEST",
+    "totalAmount": "3000.0",
+    "environment": "test",
+    "code": "00",
+    "merchantName": "EPAYTEST",
+    "message": {
+        "technicalSuccessMessage": "Your transaction has been completed.",
+        "successMessage": "Your transaction has been completed."
+    },
+    "transactionDetails": {
+        "status": "COMPLETE",
+        "referenceId": "0009CA9",
+        "date": "Mon Jan 06 14:07:59 NPT 2025"
+    }
+}

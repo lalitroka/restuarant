@@ -1,3 +1,6 @@
+import 'dart:developer';
+import 'dart:io';
+
 import 'package:bloc/bloc.dart';
 import 'package:foodmenu/model/foodaddmodel.dart';
 
@@ -14,11 +17,12 @@ class DescriptionBloc extends Bloc<DescriptionEvent, DescriptionState> {
   void _foodItemDescription(
       FoodItemDescriptionEvent event, Emitter<DescriptionState> emit) {
     for (var fooddescription in event.descriptionModel) {
+      log("Received data in BLoC: ${event.descriptionModel}");
       if (!description.any((desc) => desc.id == fooddescription.id)) {
         description.add(fooddescription);
       }
     }
-
-    emit(FoodItemDescriptionState(descriptionModel: description));
+    log("Updated description list: $description");
+    emit(FoodItemDescriptionState(descriptionModel: List.from(description)));
   }
 }

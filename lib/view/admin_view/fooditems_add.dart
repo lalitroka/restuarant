@@ -145,25 +145,23 @@ class _FoodAddPageState extends State<FoodItemsAddPage> {
                                       );
                                     }),
                                     const SizedBox(width: 8),
-                                    Expanded(
-                                      flex: 3,
-                                      child: Text(
-                                        category.name,
-                                        style: const TextStyle(
-                                          color: Colors.white,
-                                          fontSize: 24,
-                                          fontWeight: FontWeight.w700,
+                                    GestureDetector(
+                                      onTap: () {
+                                        Navigator.pushNamed(
+                                            context, '/foodaddpage');
+                                      },
+                                      child: Expanded(
+                                        child: Text(
+                                          category.name,
+                                          style: const TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 24,
+                                            fontWeight: FontWeight.w700,
+                                          ),
                                         ),
                                       ),
                                     ),
-                                    Text(
-                                      category.id.toString(),
-                                      style: const TextStyle(
-                                        color: Colors.white,
-                                        fontSize: 24,
-                                        fontWeight: FontWeight.w700,
-                                      ),
-                                    ),
+                                    Spacer(),
                                     IconButton(
                                       icon: Icon(
                                         isCategoryExpand[index]
@@ -324,29 +322,6 @@ class _FoodAddPageState extends State<FoodItemsAddPage> {
                                     return const SizedBox();
                                   },
                                 ),
-                                if (isCategoryExpand[index])
-                                  TextButton(
-                                      style: ButtonStyle(
-                                        backgroundColor: WidgetStatePropertyAll(
-                                            Colors.black),
-                                        shape: WidgetStatePropertyAll(
-                                          RoundedRectangleBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(0),
-                                          ),
-                                        ),
-                                      ),
-                                      onPressed: () {
-                                        Navigator.pushNamed(
-                                            context, '/fooddescription');
-                                      },
-                                      child: Text(
-                                        "Add Items",
-                                        style: GoogleFonts.poppins(
-                                            color: Colors.white,
-                                            fontSize: 25,
-                                            fontWeight: FontWeight.w600),
-                                      )),
                                 SizedBox(
                                   height: 20,
                                 )

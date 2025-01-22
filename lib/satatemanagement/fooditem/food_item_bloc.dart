@@ -12,9 +12,7 @@ class FoodItemBloc extends Bloc<FoodItemEvent, FoodItemState> {
 
   void _foodItemAddEvent(FoodItemAddEvent event, Emitter<FoodItemState> emit) {
     for (var foodItem in event.foodItem) {
-      if (!categoryFoodItems.any((item) => item.id == foodItem.id)) {
-        categoryFoodItems.add(foodItem);
-      }
+      categoryFoodItems.add(foodItem);
     }
     emit(FoodItemAddState(foodItem: categoryFoodItems));
   }

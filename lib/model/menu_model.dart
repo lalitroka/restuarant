@@ -1,7 +1,5 @@
 import 'dart:math';
-
 import 'package:faker/faker.dart';
-import 'package:foodmenu/model/food_model.dart';
 
 class MenuModel {
   int? id;
@@ -10,21 +8,20 @@ class MenuModel {
   String? image;
 
   MenuModel({this.id, this.foodCategory, this.image, this.foodItem});
-  MenuModel.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    foodCategory = json['foodCategory'];
-    foodItem = json['items'];
-    image = json['decoration_image'];
-  }
+}
 
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['id'] = id;
-    data['foodcategory'] = foodCategory;
-    data['items'] = foodItem;
-    data['decoration_image'] = image;
-    return data;
-  }
+class FoodModel {
+  final int id;
+  final String foodName;
+  final int foodPrice;
+  final String foodType;
+
+  FoodModel({
+    required this.id,
+    required this.foodName,
+    required this.foodPrice,
+    required this.foodType,
+  });
 }
 
 List<MenuModel> generateMenuData(int numCategories, int numFoodItems) {
@@ -34,10 +31,12 @@ List<MenuModel> generateMenuData(int numCategories, int numFoodItems) {
   for (int i = 0; i < numCategories; i++) {
     List<FoodModel> foodItems = [];
     for (int j = 0; j < numFoodItems; j++) {
+      bool isVeg = Random().nextBool();
       foodItems.add(FoodModel(
         id: j,
         foodName: faker.food.dish(),
-        foodprice: (Random().nextInt(2) + 5),
+        foodPrice: (Random().nextInt(2) + 5),
+        foodType: isVeg ? "Veg" : "Non-Veg",
       ));
     }
     String imageUrl = "https://picsum.photos/seed/category$i/300/100";
@@ -48,13 +47,25 @@ List<MenuModel> generateMenuData(int numCategories, int numFoodItems) {
       foodItem: foodItems,
     ));
   }
-
   return menuList;
 }
 
+class FoodHistoryModel {
+  final int id;
+  final String foodName;
+  final int foodPrice;
+  final int foodQuantity;
+  final DateTime orderDate;
 
-
-
+  FoodHistoryModel({
+    required this.id,
+    required this.foodName,
+    required this.foodPrice,
+    required this.foodQuantity,
+    required this.orderDate,
+  });
+  int get totalPrice => foodPrice * foodQuantity;
+}
 
 
 

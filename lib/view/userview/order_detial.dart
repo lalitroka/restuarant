@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:foodmenu/core/utils/app_text_style.dart';
 import 'package:foodmenu/satatemanagement/foodorder/foodorder_bloc.dart';
 import 'package:foodmenu/view/commonwidgets/background_painter.dart';
 
@@ -30,14 +31,7 @@ class OrderDetailPage extends StatelessWidget {
                       icon: Icon(Icons.arrow_back_ios_new),
                     ),
                     SizedBox(width: screenWidth * 0.18),
-                    Text(
-                      'Order Details',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 30,
-                        fontWeight: FontWeight.w700,
-                      ),
-                    ),
+                    Text('Order Details', style: AppTextStyles.displaymedium),
                   ],
                 ),
                 SizedBox(height: 10),
@@ -49,13 +43,8 @@ class OrderDetailPage extends StatelessWidget {
 
                         if (selectedFoods.isEmpty) {
                           return Center(
-                            child: Text(
-                              "No orders found",
-                              style: TextStyle(
-                                fontSize: 18,
-                                color: Colors.white,
-                              ),
-                            ),
+                            child: Text("No orders found",
+                                style: AppTextStyles.titlemedium),
                           );
                         }
 
@@ -63,28 +52,36 @@ class OrderDetailPage extends StatelessWidget {
                           itemCount: selectedFoods.length,
                           itemBuilder: (context, orderIndex) {
                             final food = selectedFoods[orderIndex];
-                            final totalFoodPrice = food.foodPrice *
-                                food.foodQuantity *
-                                food.numberOfPeople;
+                            final totalFoodPrice =
+                                food.foodPrice * food.foodQuantity;
 
                             return Card(
+                              color: Colors.blueGrey,
                               margin: EdgeInsets.symmetric(
                                 horizontal: 3,
                                 vertical: 5,
                               ),
                               child: ListTile(
-                                title: Text('Food Name: ${food.foodName}'),
+                                title: Text(
+                                  'Food Name: ${food.foodName}',
+                                  style: AppTextStyles.titlemedium,
+                                ),
                                 subtitle: Column(
                                   spacing: 3,
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    Text('Quantity: ${food.foodQuantity} kg'),
                                     Text(
-                                        'Price Per kg: \$${food.foodPrice.toStringAsFixed(2)}'),
+                                      'Quantity: ${food.foodQuantity} kg',
+                                      style: AppTextStyles.titleSmall,
+                                    ),
                                     Text(
-                                        'Number of People: ${food.numberOfPeople}'),
+                                      'Price Per kg: \$${food.foodPrice.toStringAsFixed(2)}',
+                                      style: AppTextStyles.titleSmall,
+                                    ),
                                     Text(
-                                        'Total: \$${totalFoodPrice.toStringAsFixed(2)}'),
+                                      'Total: \$${totalFoodPrice.toStringAsFixed(2)}',
+                                      style: AppTextStyles.titleSmall,
+                                    ),
                                     SizedBox(
                                       height: 10,
                                     )
@@ -97,13 +94,8 @@ class OrderDetailPage extends StatelessWidget {
                       }
 
                       return Center(
-                        child: Text(
-                          "No orders found",
-                          style: TextStyle(
-                            fontSize: 18,
-                            color: Colors.white,
-                          ),
-                        ),
+                        child: Text("No orders found",
+                            style: AppTextStyles.titlemedium),
                       );
                     },
                   ),
@@ -120,9 +112,7 @@ class OrderDetailPage extends StatelessWidget {
                             0.0,
                             (previousValue, food) =>
                                 previousValue +
-                                (food.foodPrice *
-                                    food.foodQuantity *
-                                    food.numberOfPeople),
+                                (food.foodPrice * food.foodQuantity),
                           );
 
                           return Column(
@@ -136,36 +126,29 @@ class OrderDetailPage extends StatelessWidget {
                                 children: [
                                   Text(
                                     'Total Price',
-                                    style: TextStyle(
-                                      fontSize: 24,
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.bold,
-                                    ),
+                                    style: AppTextStyles.titlelarge,
                                   ),
                                   Text(
-                                    ' \$${totalOrderPrice.toStringAsFixed(2)}',
-                                    style: TextStyle(
-                                      fontSize: 20,
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
+                                      ' \$${totalOrderPrice.toStringAsFixed(2)}',
+                                      style: AppTextStyles.titlemedium),
                                 ],
                               ),
                               SizedBox(
                                 height: 20,
                               ),
-                              Container(
-                                padding: EdgeInsets.symmetric(
-                                    horizontal: 15, vertical: 15),
-                                decoration: BoxDecoration(
-                                    color: Colors.amberAccent,
-                                    borderRadius: BorderRadius.circular(10)),
-                                child: Text(
-                                  ' finalized order',
-                                  style: TextStyle(
-                                    fontSize: 20,
-                                  ),
+                              GestureDetector(
+                                onTap: () {
+                                  Navigator.pushNamed(
+                                      context, '/userpaymentpage');
+                                },
+                                child: Container(
+                                  padding: EdgeInsets.symmetric(
+                                      horizontal: 15, vertical: 15),
+                                  decoration: BoxDecoration(
+                                      color: Colors.amberAccent,
+                                      borderRadius: BorderRadius.circular(10)),
+                                  child: Text('Proceed Order',
+                                      style: AppTextStyles.buttonText),
                                 ),
                               ),
                             ],

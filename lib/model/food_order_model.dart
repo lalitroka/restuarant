@@ -3,14 +3,13 @@ class FoodOrderModel {
   final String foodName;
   final int foodPrice;
   final int foodQuantity;
-  final int numberOfPeople;
 
-  FoodOrderModel(
-      {required this.id,
-      required this.foodName,
-      required this.foodPrice,
-      required this.foodQuantity,
-      required this.numberOfPeople});
+  FoodOrderModel({
+    required this.id,
+    required this.foodName,
+    required this.foodPrice,
+    required this.foodQuantity,
+  });
 
   factory FoodOrderModel.fromMap(Map<String, dynamic> map) {
     return FoodOrderModel(
@@ -18,7 +17,6 @@ class FoodOrderModel {
       foodName: map['foodName'],
       foodPrice: map['foodPrice'],
       foodQuantity: map['foodQuantity'],
-      numberOfPeople: map['numberOfPeople'],
     );
   }
 
@@ -28,7 +26,6 @@ class FoodOrderModel {
       'foodName': foodName,
       'foodPrice': foodPrice,
       'foodQuantity': foodQuantity,
-      'numberOfPeople': numberOfPeople,
     };
   }
 }

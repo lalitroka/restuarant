@@ -7,8 +7,8 @@ class BackgroundPainter extends CustomPainter {
       ..style = PaintingStyle.fill
       ..shader = LinearGradient(
         colors: [
-          const Color.fromARGB(255, 34, 21, 21),
-          const Color.fromARGB(255, 47, 60, 66),
+          const Color.fromARGB(255, 10, 6, 6),
+          const Color.fromARGB(255, 9, 5, 5),
         ],
         begin: Alignment.topLeft,
         end: Alignment.bottomRight,

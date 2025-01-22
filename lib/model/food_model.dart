@@ -1,13 +1,3 @@
-class FoodModel {
-  final int id;
-  final String foodName;
-  final int foodprice;
-
-  FoodModel(
-      {required this.id, required this.foodName, required this.foodprice});
-}
-
-
 
 
 
