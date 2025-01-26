@@ -1,17 +1,15 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:foodmenu/core/utils/app_text_style.dart';
 import 'package:foodmenu/view/commonwidgets/background_painter.dart';
-import 'package:google_fonts/google_fonts.dart';
 
-class NewOrderTap extends StatefulWidget {
-  const NewOrderTap({super.key});
+class NewOrderTab extends StatefulWidget {
+  const NewOrderTab({super.key});
 
   @override
-  State<NewOrderTap> createState() => _NewOrderTapState();
+  State<NewOrderTab> createState() => _NewOrderTabState();
 }
 
-class _NewOrderTapState extends State<NewOrderTap> {
+class _NewOrderTabState extends State<NewOrderTab> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -20,21 +18,28 @@ class _NewOrderTapState extends State<NewOrderTap> {
         child: Padding(
           padding: const EdgeInsets.all(8.0),
           child: Expanded(
-              child: ListView.separated(
-            separatorBuilder: (context, index) => SizedBox(
-              height: 10,
-            ),
+              child: ListView.builder(
             itemCount: 3,
             itemBuilder: (context, index) {
               return InkWell(
                 onTap: () {
-                  Navigator.pushNamed(context, '/paymentviewpage');
+                  Navigator.pushNamed(context, '/adminneworderpage');
                 },
                 child: Container(
-                  padding: EdgeInsets.symmetric(vertical: 20, horizontal: 4),
-                  decoration: BoxDecoration(
-                    border: Border.all(width: 2, color: Colors.white),
-                  ),
+                    margin: EdgeInsets.symmetric(vertical: 8),
+                padding: EdgeInsets.symmetric(horizontal: 5,vertical: 5),
+                      decoration: BoxDecoration(
+                          color: const Color.fromARGB(255, 25, 29, 32),
+                        borderRadius: BorderRadius.circular(12), 
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.blueGrey,
+                          spreadRadius: -1 ,
+                          offset: Offset.fromDirection(1,3),
+                          blurRadius: 8.3,
+                        )
+                      ]
+                      ),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -43,14 +48,15 @@ class _NewOrderTapState extends State<NewOrderTap> {
                           Text('Order: #201',
                               style: AppTextStyles.titleSmall
                                   .copyWith(color: Colors.greenAccent)),
+                                Text('Table No.  2', style: AppTextStyles.bodymedium.copyWith(fontWeight: FontWeight.w100)),
                           Text('mike tyson', style: AppTextStyles.titleSmall),
-                          Text('983232232', style: AppTextStyles.bodymedium),
+                       
                         ],
                       ),
                       Column(
                         children: [
-                          Text('Buff MOMO', style: AppTextStyles.titlemedium),
-                          Text('1000', style: AppTextStyles.titlemedium),
+                          Text('Quantiy', style: AppTextStyles.titlemedium),
+                          Text('3', style: AppTextStyles.titlemedium),
                         ],
                       ),
                       Column(

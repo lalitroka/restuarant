@@ -1,3 +1,5 @@
+// ignore_for_file: unnecessary_const
+
 import 'dart:convert';
 import 'dart:developer';
 import 'dart:io';
@@ -49,11 +51,11 @@ class EsewaFlutterSdk {
           onPaymentSuccess(paymentResult);
           break;
         case PAYMENT_METHOD_FAILURE:
-          print(":::METHOD CALL RESULT FAILURE");
+          log(":::METHOD CALL RESULT FAILURE");
           onPaymentFailure(call.arguments);
           break;
         case PAYMENT_METHOD_CANCELLATION:
-          print(":::METHOD CALL RESULT CANCELLATION");
+          log(":::METHOD CALL RESULT CANCELLATION");
           onPaymentCancellation(call.arguments);
           break;
       }

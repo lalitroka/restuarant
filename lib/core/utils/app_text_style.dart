@@ -2,26 +2,25 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class AppTextStyles {
-  static const String fontFamily = "poppins";
 
-  static TextStyle displayLarge = GoogleFonts.kanit(
+  static TextStyle displayLarge = GoogleFonts.poppins(
     fontSize: 42,
     color: Colors.white,
     fontWeight: FontWeight.bold,
   );
 
-  static TextStyle displaymedium = GoogleFonts.kanit(
+  static TextStyle displaymedium = GoogleFonts.poppins(
     fontSize: 34,
     color: Colors.white,
   );
 
-  static TextStyle displaysmall = GoogleFonts.kanit(
+  static TextStyle displaysmall = GoogleFonts.poppins(
     fontSize: 27,
     color: Colors.white,
   );
 
-  static const TextStyle headlineLarge = TextStyle(
-    fontFamily: fontFamily,
+  static  TextStyle headlineLarge = GoogleFonts.poppins(
+  
     fontSize: 25,
     fontWeight: FontWeight.bold,
     color: Colors.white,
@@ -43,19 +42,20 @@ class AppTextStyles {
     fontWeight: FontWeight.w600,
     color: Colors.white,
   );
-
   static TextStyle bodymedium = GoogleFonts.poppins(
-      color: Colors.white, fontSize: 17, fontWeight: FontWeight.w700);
+      color: Colors.white, fontSize: 16, fontWeight: FontWeight.w600);
 
-  static const TextStyle searchFilter = TextStyle(
-    fontFamily: fontFamily,
-    fontSize: 18,
+  static TextStyle bodysmall = GoogleFonts.poppins(
+      color: Colors.white, fontSize: 15, fontWeight: FontWeight.w500);
+
+  static  TextStyle searchFilter = GoogleFonts.poppins(
+  
+    fontSize: 13,
     fontWeight: FontWeight.w600,
     color: Colors.white,
   );
 
-  static const TextStyle buttonText = TextStyle(
-    fontFamily: fontFamily,
+  static  TextStyle buttonText = GoogleFonts.poppins(
     fontSize: 20,
     fontWeight: FontWeight.w400,
   );

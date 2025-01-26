@@ -13,53 +13,65 @@ class _OrderCompleteTabState extends State<OrderCompleteTab> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: CustomPaint(
-      painter: BackgroundPainter(),
-      child: Expanded(
-          child: ListView.separated(
-        separatorBuilder: (context, index) => SizedBox(
-          height: 10,
-        ),
-        itemCount: 3,
-        itemBuilder: (context, index) {
-          return InkWell(
-            onTap: () {
-              Navigator.pushNamed(context, '/paymentviewpage');
+      body: CustomPaint(
+        painter: BackgroundPainter(),
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Expanded(
+              child: ListView.builder(
+            itemCount: 3,
+            itemBuilder: (context, index) {
+              return InkWell(
+                onTap: () {
+                  Navigator.pushNamed(context,'/adminordercomplete');
+                },
+                child: Container(
+                    margin: EdgeInsets.symmetric(vertical: 8),
+                padding: EdgeInsets.symmetric(horizontal: 5,vertical: 5),
+                      decoration: BoxDecoration(
+                          color: const Color.fromARGB(255, 25, 29, 32),
+                        borderRadius: BorderRadius.circular(12), 
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.blueGrey,
+                          spreadRadius: -1 ,
+                          offset: Offset.fromDirection(1,3),
+                          blurRadius: 8.3,
+                        )
+                      ]
+                      ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Column(
+                        children: [
+                          Text('Order: #201',
+                              style: AppTextStyles.titleSmall
+                                  .copyWith(color: Colors.greenAccent)),
+                                Text('Table No.  2', style: AppTextStyles.bodymedium.copyWith(fontWeight: FontWeight.w100)),
+                          Text('mike tyson', style: AppTextStyles.titleSmall),
+                       
+                        ],
+                      ),
+                      Column(
+                        children: [
+                          Text('Quantiy', style: AppTextStyles.titlemedium),
+                          Text('3', style: AppTextStyles.titlemedium),
+                        ],
+                      ),
+                      Column(
+                        children: [
+                          Text(' 2:20 PM', style: AppTextStyles.titlemedium),
+                        ],
+                      )
+                    ],
+                  ),
+                ),
+              );
             },
-            child: Container(
-              padding: EdgeInsets.symmetric(vertical: 20, horizontal: 4),
-              decoration: BoxDecoration(
-                border: Border.all(width: 2, color: Colors.white),
-              ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Column(
-                    children: [
-                      Text('Order: #201',
-                          style: AppTextStyles.titleSmall
-                              .copyWith(color: Colors.greenAccent)),
-                      Text('mike tyson', style: AppTextStyles.titleSmall),
-                      Text('983232232', style: AppTextStyles.bodymedium),
-                    ],
-                  ),
-                  Column(
-                    children: [
-                      Text('Buff MOMO', style: AppTextStyles.titlemedium),
-                      Text('1000', style: AppTextStyles.titlemedium),
-                    ],
-                  ),
-                  Column(
-                    children: [
-                      Text(' 2:20 PM', style: AppTextStyles.titlemedium),
-                    ],
-                  )
-                ],
-              ),
-            ),
-          );
-        },
-      )),
-    ));
+          )),
+        ),
+      ),
+    );
   }
 }

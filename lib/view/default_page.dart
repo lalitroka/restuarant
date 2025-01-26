@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:foodmenu/core/utils/app_text_style.dart';
 
 class DefaultPage extends StatefulWidget {
   const DefaultPage({super.key});
@@ -13,18 +14,24 @@ class _DefaultPageState extends State<DefaultPage> {
     return Scaffold(
       body: Center(
         child: Column(
+          spacing: 20,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+
+            Text('Create account ', style: AppTextStyles.displaymedium.copyWith(color: Colors.black),),
             TextButton(
                 onPressed: () {
-                  Navigator.pushNamed(context, '/userhomepage');
+                  Navigator.pushNamed(context, '/adminloginhomepage');
                 },
-                child: Text("user View")),
+                child: Text(" I am consumer",style: AppTextStyles.titlelarge.copyWith(color: Colors.black),)),
             TextButton(
                 onPressed: () {
-                  Navigator.pushNamed(context, '/adminhomepage');
+                  Navigator.pushNamed(context, '/adminloginhomepage');
                 },
-                child: Text('Admin View'))
+                child: Text('I am Service provider',style: AppTextStyles.titlelarge.copyWith(color: Colors.black),)),
+
+               
+
           ],
         ),
       ),
